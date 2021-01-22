@@ -109,10 +109,10 @@ def construct_thingtalk(entities, sortObj):
     if sort_query:
         query = "%s(%s)" % (sort_query, query)
 
-    if hasID:
-        query = "UT: now => (" + query + ")[1]"
-    else:
-        query = "UT: now => " + query
+    #if hasID:
+    #    query = "UT: now => (" + query + ")[1]"
+    #else:
+    query = "UT: now => " + query
 
     query += " => @com.spotify.play_%s(%s=id);\n" % (query_type, query_type)
     return query
