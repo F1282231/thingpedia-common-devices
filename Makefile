@@ -55,7 +55,7 @@ debug_level ?= 1
 subsample_thingpedia ?= 0.75
 update_canonical_flags ?= --algorithm bert,adj,bart --paraphraser-model ./models/paraphraser-bart
 synthetic_expand_factor ?= 3
-quoted_paraphrase_expand_factor ?= 1000
+quoted_paraphrase_expand_factor ?= 100
 noquote_paraphrase_expand_factor ?= 10
 quoted_fraction ?= 0.05
 
