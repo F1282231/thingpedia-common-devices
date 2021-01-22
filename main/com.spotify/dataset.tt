@@ -24,14 +24,24 @@ dataset @com.spotify language "en" {
 
     action (p_song :Entity(com.spotify:song)) := @com.spotify.play_song(song=p_song)
     #_[utterances=["play ${p_song} on spotify",
-                   "on spotify play ${p_song}",
                    "play ${p_song}"]]
     #[id=27924741]
     ;
 
-    program (p_song :Entity(com.spotify:song)) := @com.spotify.play_song(song=p_song)
-    #_[utterances=["i would like to hear ${p_song}",
-                   "i would like to listen to ${p_song}"]]
+    program (p_song :String) := (@com.spotify.song(), id =~ p_song)[1] => @com.spotify.play_song(song=id)
+    #_[utterances=["i would like to hear ${p_song:const}",
+                   "i would like to listen to ${p_song:const}",
+                   "play ${p_song:const} on spotify",
+                   "on spotify play ${p_song:const}",
+                   "play ${p_song:const}"]]
+    ;
+
+    program (p_genre :String) := (@com.spotify.song(), contains(genres, p_genre)) => @com.spotify.play_song(song=id)
+    #_[utterances=["i would like to hear some ${p_genre:const}",
+                   "i would like to listen to ${p_genre:const} music",
+                   "play ${p_genre:const} on spotify",
+                   "on spotify play ${p_genre:const} music",
+                   "play ${p_genre:const} music"]]
     ;
 
     action (p_state :Enum(on,off)) := @com.spotify.player_shuffle(shuffle=p_state)
